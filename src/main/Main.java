@@ -69,6 +69,10 @@ public class Main {
 					dir += ".fizzbuzz";
 					game = FizzBuzz.decode(dir);
 					game.start(input);
+					if (game.getStatus().equals("Finalizado")) {
+						fbr.create(game);
+						fbr.save(fizzbuzzFile.getName());
+					}
 					break;
 				case 3:
 					System.out.println(fbr.top10());

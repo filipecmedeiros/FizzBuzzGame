@@ -60,7 +60,7 @@ public class FizzBuzz implements Serializable{
 		int number;
 		Random random = new Random();
 		while (correct) {
-			number = random.nextInt(10);
+			number = random.nextInt(1000);
 			
 			System.out.println(number + " (+S para salvar)");
 			input = scanner.next();
