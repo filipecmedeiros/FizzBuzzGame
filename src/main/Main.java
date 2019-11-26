@@ -23,6 +23,7 @@ public class Main {
 		int menu=0;
 		boolean exit = false;
 		boolean validInput = false;
+		FizzBuzz game;
 		
 		String tutorial = "\n\nOlá, seja bem vindo(a) ao FizzBuzz!\n"
 				+"A regra do jogo é simples:\n\n"
@@ -53,7 +54,7 @@ public class Main {
 				case 1: 
 					System.out.println("Digite o nome do jogador:");
 					String player = input.next();
-					FizzBuzz game = new FizzBuzz (player);
+					game = new FizzBuzz (player);
 					System.out.println(tutorial);
 					game.start(input);
 					if (game.getStatus().equals("Finalizado")) {
@@ -62,6 +63,12 @@ public class Main {
 					}
 					break;
 				case 2:
+					FizzBuzz.listGames();
+					System.out.println("Informe o jogo que deseja carregar:");
+					String dir = input.next();
+					dir += ".fizzbuzz";
+					game = FizzBuzz.decode(dir);
+					game.start(input);
 					break;
 				case 3:
 					System.out.println(fbr.top10());

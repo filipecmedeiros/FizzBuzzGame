@@ -1,8 +1,15 @@
 package model;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Random;
 import java.util.Scanner;
+
 
 public class FizzBuzz implements Serializable{
 
@@ -55,8 +62,16 @@ public class FizzBuzz implements Serializable{
 		while (correct) {
 			number = random.nextInt(10);
 			
-			System.out.println(number);
+			System.out.println(number + " (+S para salvar)");
 			input = scanner.next();
+			
+			if (requestToSave(input)) {
+				System.out.println("Informe o nome do arquivo:");
+				input = scanner.next();
+				input += ".fizzbuzz";
+				save("./"+input);
+				break;
+			}
 			
 			correct = valid(number, input.toLowerCase());
 			if (correct) {
@@ -69,6 +84,25 @@ public class FizzBuzz implements Serializable{
 				showPoints();
 			}
 		}
+	}
+	
+	public static void listGames() {
+		File dir = new File("./");
+		
+		if (dir.exists()) {
+			File [] files = dir.listFiles();
+			
+			for (int i=0; i<files.length;i++) {
+				if (files[i].isFile() && files[i].getName().contains(".fizzbuzz"))
+					System.out.println(files[i].getName());
+			}
+			System.out.println("\n");
+			
+		}
+	}
+	
+	public boolean requestToSave(String input) {
+		return input.contains("+S");
 	}
 	
 	public void increasePoints() {
@@ -106,5 +140,46 @@ public class FizzBuzz implements Serializable{
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	
+    public void save(String directory) {
+		File file = new File(directory);
+		
+		try {
+			if (!file.exists()) {
+				file.createNewFile();
+			}
+			FileOutputStream fout = new FileOutputStream(file);
+			ObjectOutputStream oos = new ObjectOutputStream(fout);
+			oos.writeObject(this);
+			
+			fout.close();
+			oos.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+    
+	public static FizzBuzz decode (String directory) {
+		FizzBuzz r = null;
+		
+		try {	
+			FileInputStream fin = new FileInputStream(directory);
+			ObjectInputStream ois = new ObjectInputStream(fin);
+			
+			if (fin.available() != 0){
+				r = (FizzBuzz) ois.readObject();
+			}
+			
+			fin.close();
+			ois.close();
+			
+			
+		} catch (IOException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		return r;
+		
 	}
 }
