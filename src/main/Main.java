@@ -20,8 +20,9 @@ public class Main {
 			fbr = new FizzBuzzRepository();
 		
 		
-		int menu;
+		int menu=0;
 		boolean exit = false;
+		boolean validInput = false;
 		
 		String tutorial = "\n\nOlá, seja bem vindo(a) ao FizzBuzz!\n"
 				+"A regra do jogo é simples:\n\n"
@@ -38,8 +39,15 @@ public class Main {
 						+"3.Visualizar ranking\n"
 						+"4.Sair\n\n";
 		do {
-			System.out.println(mainMenu);
-			menu = input.nextInt();
+			do{
+				System.out.println(mainMenu);
+				try {
+					menu = Integer.parseInt(input.next());
+					validInput = true;
+				}catch (Exception e) { 
+					System.out.println("Entrada inválida");
+				}
+			}while (!validInput);
 			
 			switch(menu) {
 				case 1: 
@@ -56,13 +64,14 @@ public class Main {
 				case 2:
 					break;
 				case 3:
+					System.out.println(fbr.top10());
 					break;
 				case 4:
 					exit = true;
 					break;
 			}
 			
-		}while ((menu<0 || menu>5) && !exit);
+		}while ((menu>0 || menu<5) && !exit);
 		
 		fbr.save(fizzbuzzFile.getName());
 		

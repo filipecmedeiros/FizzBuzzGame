@@ -21,10 +21,10 @@ public class FizzBuzz implements Serializable{
 		String response = "";
 		
 		if (number % 3 == 0)
-			response = "Fizz";
+			response = "fizz";
 			
 		if (number % 5 == 0)
-			response += "Buzz";
+			response += "buzz";
 		
 		if (response.equals(""))
 			response = Integer.toString(number);
@@ -58,7 +58,7 @@ public class FizzBuzz implements Serializable{
 			System.out.println(number);
 			input = scanner.next();
 			
-			correct = valid(number, input);
+			correct = valid(number, input.toLowerCase());
 			if (correct) {
 				increasePoints();
 				System.out.println("Correto!");
