@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="300.0" prefWidth="400.0" styleClass="anchor" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FXMLButtonController">
+   <children>
+      <Button fx:id="novoJogo" layoutX="166.0" layoutY="125.0" mnemonicParsing="false" onAction="#newGameButtonPushed" text="Novo Jogo" />
+      <Button fx:id="button1" layoutX="172.0" layoutY="202.0" mnemonicParsing="false" onAction="#rankingGameButton" text="Ranking" />
+      <Button fx:id="button" layoutX="164.0" layoutY="243.0" mnemonicParsing="false" onAction="#actionQuitGame" text="Quit Game" />
+      <Button fx:id="carregarJogo" layoutX="157.0" layoutY="165.0" mnemonicParsing="false" onAction="#loadGameButtonPushed" text="Carregar Jogo" />
+      <Label fx:id="labelOlaMundo" layoutX="128.0" layoutY="93.0" prefHeight="17.0" prefWidth="149.0" />
+      <Label layoutX="240.0" layoutY="42.0" prefHeight="52.0" prefWidth="41.0" text="UP" textFill="#f5ff00">
+         <font>
+            <Font name="Mistral" size="38.0" />
+         </font>
+      </Label>
+      <Label layoutX="122.0" layoutY="32.0" prefHeight="72.0" prefWidth="126.0" text="MATH - " textFill="#e0f805" textOverrun="CENTER_ELLIPSIS">
+         <font>
+            <Font name="Yu Gothic UI Semilight" size="34.0" />
+         </font>
+      </Label>
+   </children>
+   <effect>
+      <Blend />
+   </effect>
+   <cursor>
+      <Cursor fx:constant="DEFAULT" />
+   </cursor>
+</AnchorPane>

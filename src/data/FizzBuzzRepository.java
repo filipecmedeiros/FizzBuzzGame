@@ -18,7 +18,7 @@ public class FizzBuzzRepository extends AbstractRepository <FizzBuzz> {
 			getRep().add(i, object);
 		}
 		else {
-			System.out.println(object + " já está cadastrado");
+			System.out.println(object + " ja esta cadastrado");
 		}
 		
 	}

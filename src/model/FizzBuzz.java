@@ -11,18 +11,29 @@ import java.util.Random;
 import java.util.Scanner;
 
 
+/**
+ * @author gih_s
+ *
+ */
 public class FizzBuzz implements Serializable{
 
 	private String player;
 	private int points;
 	private String status; //"Jogando" ou "Finalizado"
-	
-
+	int number;
+	Random random = new Random();
 	public FizzBuzz (String player) {
 		this.player = player;
 		this.points = 0;
 		this.status = "Jogando";
 	}
+	
+	public FizzBuzz () {
+		this.player = player;
+		this.points = 0;
+		this.status = "Jogando";
+	}
+	
 	
 	public String fizzbuzz(int number) {
 		String response = "";
@@ -47,6 +58,9 @@ public class FizzBuzz implements Serializable{
 			if (input.equals(answer)) {
 				valid=true;
 			}
+			else if (answer.equals(Integer.toString(number)) && input.equals("")){
+				valid=true;
+			}
 		}
 		catch (Exception e) {
 			
@@ -54,36 +68,28 @@ public class FizzBuzz implements Serializable{
 		return valid;
 	}
 	
-	public void start(Scanner scanner) {
-		boolean correct = true;
-		String input = null;
-		int number;
-		Random random = new Random();
-		while (correct) {
-			number = random.nextInt(1000);
-			
-			System.out.println(number + " (+S para salvar)");
-			input = scanner.next();
-			
-			if (requestToSave(input)) {
-				System.out.println("Informe o nome do arquivo:");
-				input = scanner.next();
-				input += ".fizzbuzz";
-				save("./"+input);
-				break;
-			}
-			
-			correct = valid(number, input.toLowerCase());
-			if (correct) {
-				increasePoints();
-				System.out.println("Correto!");
-			}
-			else {
-				gameOver();
-				System.out.println("Game over!");
-				showPoints();
-			}
+	public int showNumber() {
+		
+		number = random.nextInt(1000);
+		return number;
+	}
+	
+	public int play(String jogada) {
+		
+
+		if(valid(number,jogada.toLowerCase())) {			
+			System.out.println("Correto!");
+			return 10;
+		}else {
+			gameOver();
+			System.out.println("Game over!");
+			return 0;
 		}
+	}
+	
+	public void saveGame(String nameGame) {
+			nameGame += ".fizzbuzz";
+			save("./"+nameGame);		
 	}
 	
 	public static void listGames() {
@@ -101,9 +107,9 @@ public class FizzBuzz implements Serializable{
 		}
 	}
 	
-	public boolean requestToSave(String input) {
+/*	public boolean requestToSave(String input) {
 		return input.contains("+S");
-	}
+	}*/
 	
 	public void increasePoints() {
 		setPoints(getPoints()+10);
